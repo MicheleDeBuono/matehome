@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant D as UWB Device
+    participant B as Backend
+    participant P as Processing
+    participant N as Notifications
+    participant A as App
+
+    D->>B: Raw Data (1Hz)
+    B->>P: Stream Processing
+    P->>B: Processed Data
+    P->>N: Trigger Alert
+    N->>A: Push Notification
+    A->>B: Fetch Details
+    B->>A: Return Data

@@ -1,0 +1,40 @@
+graph TB
+    subgraph "Frontend"
+        MA[Mobile App]
+        WD[Web Dashboard]
+    end
+    
+    subgraph "Backend Services"
+        AG[API Gateway]
+        AS[Auth Service]
+        DS[Device Service]
+        NS[Notification Service]
+        ALS[Analytics Service]
+    end
+    
+    subgraph "Data Storage"
+        PG[(PostgreSQL)]
+        RD[(Redis)]
+        TS[(TimescaleDB)]
+    end
+    
+    subgraph "External Systems"
+        UWB[UWB Devices]
+        PS[Push Service]
+    end
+    
+    MA --> AG
+    WD --> AG
+    AG --> AS
+    AG --> DS
+    AG --> NS
+    AG --> ALS
+    
+    AS --> PG
+    DS --> PG
+    NS --> RD
+    ALS --> TS
+    
+    UWB --> DS
+    NS --> PS
+    PS --> MA

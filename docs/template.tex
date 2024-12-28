@@ -1,0 +1,122 @@
+\documentclass[11pt,a4paper]{article}
+
+% Pacchetti di base
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage{textcomp}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{framed}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{setspace}
+\usepackage{microtype}
+
+% Definizione di \tightlist
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Definizione dei colori
+\definecolor{primary}{HTML}{2196F3}
+\definecolor{secondary}{HTML}{757575}
+\definecolor{background}{HTML}{FFFFFF}
+\definecolor{accent}{HTML}{FF4081}
+\definecolor{success}{HTML}{4CAF50}
+\definecolor{warning}{HTML}{FFC107}
+\definecolor{error}{HTML}{F44336}
+\definecolor{codeBackground}{HTML}{F5F5F5}
+\definecolor{codeBorder}{HTML}{E0E0E0}
+
+% Configurazione hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primary,
+    urlcolor=primary,
+    citecolor=primary,
+    linktoc=all
+}
+
+% Configurazione intestazione e piè di pagina
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\rhead{\color{secondary}\small MATE HOME 2}
+\lhead{\color{secondary}\small Analisi Funzionale}
+\rfoot{\color{secondary}\small Pagina \thepage}
+
+% Configurazione titoli
+\titleformat{\section}
+{\Large\bfseries\color{primary}}{\thesection}{1em}{}[\vspace{0.5em}]
+\titleformat{\subsection}
+{\large\bfseries\color{primary!80}}{\thesubsection}{1em}{}[\vspace{0.3em}]
+\titleformat{\subsubsection}
+{\normalsize\bfseries\color{secondary}}{\thesubsubsection}{1em}{}[\vspace{0.2em}]
+
+% Configurazione blocchi di codice
+\lstset{
+    basicstyle=\small\ttfamily,
+    backgroundcolor=\color{codeBackground},
+    frame=single,
+    framesep=3pt,
+    framexleftmargin=3pt,
+    framexrightmargin=3pt,
+    frameround=tttt,
+    rulecolor=\color{codeBorder},
+    numbers=left,
+    numberstyle=\tiny\color{secondary},
+    keywordstyle=\color{primary},
+    commentstyle=\color{success},
+    stringstyle=\color{accent},
+    breaklines=true,
+    breakatwhitespace=true,
+    showstringspaces=false,
+    tabsize=2,
+    captionpos=b
+}
+
+% Definizione ambiente Shaded per blocchi di codice
+\definecolor{shadecolor}{RGB}{245,245,245}
+\newenvironment{Shaded}{\begin{snugshade}\small\ttfamily}{\end{snugshade}}
+
+% Configurazione spaziatura
+\setlength{\parskip}{0.8em}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{1.15}
+
+% Configurazione indice
+\renewcommand{\cftsecfont}{\normalsize\color{primary}}
+\renewcommand{\cftsubsecfont}{\small\color{secondary}}
+\renewcommand{\cftsecpagefont}{\small\color{secondary}}
+\renewcommand{\cftsubsecpagefont}{\small\color{secondary}}
+
+\begin{document}
+
+% Copertina
+\begin{titlepage}
+\pagecolor{background}
+\begin{center}
+\vspace*{2cm}
+{\Huge\bfseries\color{primary}MATE HOME 2\\[1ex]}
+{\Large\color{secondary}Analisi Funzionale Dettagliata\\[3ex]}
+\vspace{2cm}
+\includegraphics[width=0.4\textwidth]{docs/diagrams/architecture.png}
+\vfill
+{\large\color{secondary}\today}
+\end{center}
+\end{titlepage}
+\nopagecolor
+
+% Indice
+\tableofcontents
+\newpage
+
+$body$
+
+\end{document}

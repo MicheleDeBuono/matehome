@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>functional-analysis-with-diagrams</title>
+  <style>
+html {
+color: #1a1a1a;
+background-color: #fdfdfd;
+}
+body {
+margin: 0 auto;
+max-width: 36em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 12px;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+html {
+background-color: white;
+}
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+a {
+color: #1a1a1a;
+}
+a:visited {
+color: #1a1a1a;
+}
+img {
+max-width: 100%;
+}
+svg {
+height: auto;
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+font-size: 85%;
+margin: 0;
+hyphens: manual;
+}
+pre {
+margin: 1em 0;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+.sourceCode {
+background-color: transparent;
+overflow: visible;
+}
+hr {
+background-color: #1a1a1a;
+border: none;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid #1a1a1a;
+border-bottom: 1px solid #1a1a1a;
+}
+th {
+border-top: 1px solid #1a1a1a;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#mate-home-2---analisi-funzionale-dettagliata" id="toc-mate-home-2---analisi-funzionale-dettagliata">MATE HOME 2 -
+Analisi Funzionale Dettagliata</a>
+<ul>
+<li><a href="#indice" id="toc-indice">Indice</a></li>
+<li><a href="#architettura-del-sistema" id="toc-architettura-del-sistema">1. Architettura del Sistema</a>
+<ul>
+<li><a href="#diagramma-architetturale" id="toc-diagramma-architetturale">1.1 Diagramma Architetturale</a></li>
+<li><a href="#flusso-dati" id="toc-flusso-dati">1.2 Flusso Dati</a></li>
+</ul></li>
+<li><a href="#funzionalità-core-mobile-app" id="toc-funzionalità-core-mobile-app">2. Funzionalità Core Mobile
+App</a>
+<ul>
+<li><a href="#navigazione-app" id="toc-navigazione-app">2.1 Navigazione
+App</a></li>
+<li><a href="#ui-components" id="toc-ui-components">2.2 UI
+Components</a></li>
+</ul></li>
+<li><a href="#servizi-backend" id="toc-servizi-backend">3. Servizi
+Backend</a>
+<ul>
+<li><a href="#api-structure" id="toc-api-structure">3.1 API
+Structure</a></li>
+<li><a href="#data-models" id="toc-data-models">3.2 Data Models</a></li>
+</ul></li>
+<li><a href="#requisiti-non-funzionali" id="toc-requisiti-non-funzionali">4. Requisiti Non Funzionali</a>
+<ul>
+<li><a href="#performance-targets" id="toc-performance-targets">4.1
+Performance Targets</a></li>
+<li><a href="#sicurezza" id="toc-sicurezza">4.2 Sicurezza</a></li>
+</ul></li>
+<li><a href="#testing-strategy" id="toc-testing-strategy">5. Testing
+Strategy</a></li>
+<li><a href="#deployment-pipeline" id="toc-deployment-pipeline">6.
+Deployment Pipeline</a></li>
+<li><a href="#monitoring" id="toc-monitoring">7. Monitoring</a></li>
+<li><a href="#appendice-a-design-system" id="toc-appendice-a-design-system">Appendice A: Design System</a>
+<ul>
+<li><a href="#colori" id="toc-colori">Colori</a></li>
+<li><a href="#tipografia" id="toc-tipografia">Tipografia</a></li>
+<li><a href="#spaziatura" id="toc-spaziatura">Spaziatura</a></li>
+</ul></li>
+<li><a href="#appendice-b-componenti-ui" id="toc-appendice-b-componenti-ui">Appendice B: Componenti UI</a>
+<ul>
+<li><a href="#cards" id="toc-cards">Cards</a></li>
+<li><a href="#buttons" id="toc-buttons">Buttons</a></li>
+<li><a href="#alerts" id="toc-alerts">Alerts</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="mate-home-2---analisi-funzionale-dettagliata">MATE HOME 2 -
+Analisi Funzionale Dettagliata</h1>
+<h2 id="indice">Indice</h2>
+<ol type="1">
+<li><a href="#1-architettura-del-sistema">Architettura del
+Sistema</a></li>
+<li><a href="#2-funzionalità-core-mobile-app">Funzionalità Core Mobile
+App</a></li>
+<li><a href="#3-servizi-backend">Servizi Backend</a></li>
+<li><a href="#4-requisiti-non-funzionali">Requisiti Non
+Funzionali</a></li>
+<li><a href="#5-testing">Testing</a></li>
+<li><a href="#6-deployment">Deployment</a></li>
+<li><a href="#7-documentazione">Documentazione</a></li>
+</ol>
+<h2 id="architettura-del-sistema">1. Architettura del Sistema</h2>
+<h3 id="diagramma-architetturale">1.1 Diagramma Architetturale</h3>
+<pre class="mermaid"><code>graph TB
+    subgraph &quot;Frontend&quot;
+        MA[Mobile App]
+        WD[Web Dashboard]
+    end
+    
+    subgraph &quot;Backend Services&quot;
+        AG[API Gateway]
+        AS[Auth Service]
+        DS[Device Service]
+        NS[Notification Service]
+        ALS[Analytics Service]
+    end
+    
+    subgraph &quot;Data Storage&quot;
+        PG[(PostgreSQL)]
+        RD[(Redis)]
+        TS[(TimescaleDB)]
+    end
+    
+    subgraph &quot;External Systems&quot;
+        UWB[UWB Devices]
+        PS[Push Service]
+    end
+    
+    MA --&gt; AG
+    WD --&gt; AG
+    AG --&gt; AS
+    AG --&gt; DS
+    AG --&gt; NS
+    AG --&gt; ALS
+    
+    AS --&gt; PG
+    DS --&gt; PG
+    NS --&gt; RD
+    ALS --&gt; TS
+    
+    UWB --&gt; DS
+    NS --&gt; PS
+    PS --&gt; MA</code></pre>
+<h3 id="flusso-dati">1.2 Flusso Dati</h3>
+<pre class="mermaid"><code>sequenceDiagram
+    participant D as UWB Device
+    participant B as Backend
+    participant P as Processing
+    participant N as Notifications
+    participant A as App
+
+    D-&gt;&gt;B: Raw Data (1Hz)
+    B-&gt;&gt;P: Stream Processing
+    P-&gt;&gt;B: Processed Data
+    P-&gt;&gt;N: Trigger Alert
+    N-&gt;&gt;A: Push Notification
+    A-&gt;&gt;B: Fetch Details
+    B-&gt;&gt;A: Return Data</code></pre>
+<h2 id="funzionalità-core-mobile-app">2. Funzionalità Core Mobile
+App</h2>
+<h3 id="navigazione-app">2.1 Navigazione App</h3>
+<pre class="mermaid"><code>graph LR
+    subgraph &quot;Tab Navigation&quot;
+        H[Home]
+        A[Alerts]
+        S[Settings]
+    end
+    
+    subgraph &quot;Stack Navigation&quot;
+        H --&gt; RD[Room Detail]
+        H --&gt; BD[Bathroom Detail]
+        A --&gt; AD[Alert Detail]
+        S --&gt; P[Profile]
+        S --&gt; N[Notifications]
+        S --&gt; D[Devices]
+    end</code></pre>
+<h3 id="ui-components">2.2 UI Components</h3>
+<h4 id="home-screen-layout">Home Screen Layout</h4>
+<pre><code>+------------------------+
+|       Status Bar       |
++------------------------+
+|    Room Status Card    |
+| +--------------------+ |
+| |  Presence Status   | |
+| |  Temperature/Humid | |
+| |  Activity Level    | |
+| +--------------------+ |
+|                        |
+|  Bathroom Status Card  |
+| +--------------------+ |
+| |  Occupancy Status  | |
+| |  Last Visit Info   | |
+| |  Environment Data  | |
+| +--------------------+ |
+|                        |
+|    Devices Section     |
+| +--------------------+ |
+| | Device 1 | Status  | |
+| | Device 2 | Status  | |
+| | Device 3 | Status  | |
+| +--------------------+ |
++------------------------+</code></pre>
+<h4 id="notification-system">Notification System</h4>
+<pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; New
+    New --&gt; Read: User Opens
+    New --&gt; Dismissed: User Swipes
+    Read --&gt; Archived: Auto/Manual
+    Dismissed --&gt; Archived
+    Archived --&gt; [*]</code></pre>
+<h2 id="servizi-backend">3. Servizi Backend</h2>
+<h3 id="api-structure">3.1 API Structure</h3>
+<pre class="mermaid"><code>classDiagram
+    class AlertService {
+        +getAlerts(filters: AlertFilters)
+        +markAsRead(ids: string[])
+        +updatePreferences(prefs: AlertPrefs)
+        +subscribe(callback: AlertCallback)
+    }
+    
+    class DeviceService {
+        +getDevices()
+        +getDeviceStatus(id: string)
+        +updateConfig(id: string, config: DeviceConfig)
+        +getReadings(id: string, timeRange: TimeRange)
+    }
+    
+    class AnalyticsService {
+        +getDailyStats(date: Date)
+        +getActivityTrends(timeRange: TimeRange)
+        +generateReport(params: ReportParams)
+    }</code></pre>
+<h3 id="data-models">3.2 Data Models</h3>
+<pre class="mermaid"><code>erDiagram
+    USER ||--o{ DEVICE : manages
+    USER ||--o{ ALERT : receives
+    DEVICE ||--o{ READING : generates
+    READING ||--o{ ALERT : triggers
+    
+    USER {
+        string id
+        string email
+        string name
+        json preferences
+    }
+    
+    DEVICE {
+        string id
+        string type
+        float battery
+        json config
+    }
+    
+    READING {
+        string id
+        timestamp time
+        json data
+    }
+    
+    ALERT {
+        string id
+        string type
+        boolean read
+        timestamp created
+    }</code></pre>
+<h2 id="requisiti-non-funzionali">4. Requisiti Non Funzionali</h2>
+<h3 id="performance-targets">4.1 Performance Targets</h3>
+<pre class="mermaid"><code>graph LR
+    subgraph &quot;API Response Times&quot;
+        A[List] --&gt; B[&lt;200ms]
+        C[Detail] --&gt; D[&lt;300ms]
+        E[Search] --&gt; F[&lt;500ms]
+    end
+    
+    subgraph &quot;UI Performance&quot;
+        G[FPS] --&gt; H[60fps]
+        I[Load] --&gt; J[&lt;2s]
+    end</code></pre>
+<h3 id="sicurezza">4.2 Sicurezza</h3>
+<pre class="mermaid"><code>flowchart TD
+    A[Request] --&gt; B{Auth Token?}
+    B --&gt;|No| C[Login Required]
+    B --&gt;|Yes| D{Valid?}
+    D --&gt;|No| E[Invalid Token]
+    D --&gt;|Yes| F{Permission?}
+    F --&gt;|No| G[Unauthorized]
+    F --&gt;|Yes| H[Proceed]</code></pre>
+<h2 id="testing-strategy">5. Testing Strategy</h2>
+<pre class="mermaid"><code>graph TD
+    subgraph &quot;Testing Pyramid&quot;
+        E2E[E2E Tests - 10%]
+        INT[Integration Tests - 30%]
+        UNIT[Unit Tests - 60%]
+    end
+    
+    subgraph &quot;Coverage Targets&quot;
+        UNIT --&gt; UT[&quot;&gt;80% Coverage&quot;]
+        INT --&gt; IT[&quot;&gt;70% Coverage&quot;]
+        E2E --&gt; ET[&quot;&gt;50% Coverage&quot;]
+    end</code></pre>
+<h2 id="deployment-pipeline">6. Deployment Pipeline</h2>
+<pre class="mermaid"><code>graph LR
+    subgraph &quot;CI/CD Pipeline&quot;
+        A[Commit] --&gt; B[Build]
+        B --&gt; C[Test]
+        C --&gt; D[Quality]
+        D --&gt; E[Security]
+        E --&gt; F[Deploy]
+    end
+    
+    subgraph &quot;Environments&quot;
+        F --&gt; DEV[Development]
+        F --&gt; STG[Staging]
+        F --&gt; PRD[Production]
+    end</code></pre>
+<h2 id="monitoring">7. Monitoring</h2>
+<pre class="mermaid"><code>graph TD
+    subgraph &quot;Metrics Collection&quot;
+        A[App Performance]
+        B[Error Rates]
+        C[User Activity]
+        D[System Health]
+    end
+    
+    subgraph &quot;Alerting&quot;
+        A --&gt; E[Dashboard]
+        B --&gt; E
+        C --&gt; E
+        D --&gt; E
+        E --&gt; F[Alert Rules]
+        F --&gt; G[Notifications]
+    end</code></pre>
+<h2 id="appendice-a-design-system">Appendice A: Design System</h2>
+<h3 id="colori">Colori</h3>
+<ul>
+<li>Primary: #007AFF</li>
+<li>Success: #4CAF50</li>
+<li>Warning: #FFC107</li>
+<li>Error: #F44336</li>
+<li>Info: #2196F3</li>
+<li>Background: #F5F5F5</li>
+<li>Surface: #FFFFFF</li>
+</ul>
+<h3 id="tipografia">Tipografia</h3>
+<ul>
+<li>Heading 1: SF Pro Display, 24px, Bold</li>
+<li>Heading 2: SF Pro Display, 20px, Semibold</li>
+<li>Body: SF Pro Text, 16px, Regular</li>
+<li>Caption: SF Pro Text, 14px, Regular</li>
+</ul>
+<h3 id="spaziatura">Spaziatura</h3>
+<ul>
+<li>XS: 4px</li>
+<li>S: 8px</li>
+<li>M: 16px</li>
+<li>L: 24px</li>
+<li>XL: 32px</li>
+<li>XXL: 48px</li>
+</ul>
+<h2 id="appendice-b-componenti-ui">Appendice B: Componenti UI</h2>
+<h3 id="cards">Cards</h3>
+<pre><code>+------------------------+
+|    Component Card      |
+|                        |
+| [ Icon ]  Title        |
+| Description            |
+| Value     Status       |
+|                        |
++------------------------+</code></pre>
+<h3 id="buttons">Buttons</h3>
+<pre><code>[Primary Button]
+[Secondary Button]
+[Text Button]</code></pre>
+<h3 id="alerts">Alerts</h3>
+<pre><code>! Warning Alert
+✓ Success Alert
+ℹ Info Alert
+✕ Error Alert</code></pre>
+</body>
+</html>
